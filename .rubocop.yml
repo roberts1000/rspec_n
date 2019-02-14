@@ -1,0 +1,5 @@
+inherit_gem:
+  rubocop_plus: config/rubocop.yml
+
+Style/Documentation:
+  Enabled: false
