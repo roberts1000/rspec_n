@@ -56,6 +56,5 @@ module RspecN
       return @status_string = "Fail" if !@rspec_status.exitstatus.zero?
       @status_string = "Undetermined"
     end
-
   end
 end

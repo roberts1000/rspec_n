@@ -1,17 +1,13 @@
 module RspecN
-  class Runner
-    attr_reader :count, :command
+  class Runner < Cri::CommandRunner
+    attr_reader :command, :iterations
 
-    def initialize(count:, command:)
-      @count = count
-      @command = command
+    def initialize(options, args)
+      input = Input.new(options, args)
+      @iterations = input.iterations
+      @command = input.command
       @formatter = Formatters::TableFormatter.new(runner: self)
       initialize_runs
-    end
-
-    def initialize_runs
-      @runs = {}
-      @count.times { |i| @runs[i + 1] = Run.new(iteration: i + 1) }
     end
 
     def start
@@ -24,10 +20,15 @@ module RspecN
     end
 
     def avg_duration_seconds
-      (total_duration_seconds / @count).floor
+      (total_duration_seconds / @iterations).floor
     end
 
     private
+
+    def initialize_runs
+      @runs = {}
+      @iterations.times { |i| @runs[i + 1] = Run.new(iteration: i + 1) }
+    end
 
     def run_tests
       @runs.each do |_iteration, run|
@@ -40,9 +41,9 @@ module RspecN
     end
 
     def display_intro
-      count_part = "#{count} times".colorize(:yellow)
+      iteration_part = "#{@iterations} times".colorize(:yellow)
       command_part = command.to_s.colorize(:yellow)
-      puts "\nRSpec will execute #{count_part} using #{command_part}\n\n"
+      puts "\nRSpec will execute #{iteration_part} using #{command_part}\n\n"
     end
   end
 end
