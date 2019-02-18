@@ -51,9 +51,9 @@ module RspecN
     end
 
     def finalize_status_string
-      return @status_string = "Pass with Warnings" if @rspec_status.to_i.zero? && !@rspec_stderr.empty?
-      return @status_string = "Pass" if @rspec_status.to_i.zero?
-      return @status_string = "Fail" if !@rspec_status.to_i.zero?
+      return @status_string = "Pass with Warnings" if @rspec_status.exitstatus.zero? && !@rspec_stderr.empty?
+      return @status_string = "Pass" if @rspec_status.exitstatus.zero?
+      return @status_string = "Fail" if !@rspec_status.exitstatus.zero?
       @status_string = "Undetermined"
     end
 
