@@ -1,8 +1,70 @@
 #!/usr/bin/env ruby
 
+# This script runs the rspec_n executable.
+#
+# EXECUTION
+#
+# rspec_n     # Run the project's RSpec test suite 10 times.
+# rspec_n N   # Run the projects's test suite N times.
+#
+# EXIT STATUS
+#
+# See below for exit status codes and their meaning.
+
 lib = File.expand_path('../lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
-require "rspec_n"
+require "cri"
+require "rspec_n/constants"
+require "rspec_n/errors"
 
-RspecN::Runner.new(count: 2, command: "rm -rf tmp && bundle exec rspec").start
+# rubocop:disable Metrics/BlockLength
+command = Cri::Command.define do
+  usage       'rspec_n [iterations] [options]'
+  description "rspec_n is an executable installed by the rspec_n Ruby gem.  It provides a " \
+    "way to re-run an RSpec test suite 'N' times, which is useful when determining " \
+    "if a test suite is consistent.\n\n" \
+    "STATUS CODES\n\n" \
+    "0 - rspec_n ran successfully                                            \u00A0\n" \
+    "1 - problem with the commandline options                                \u00A0"
+
+  flag :h, :help, 'show help' do |_value, cmd|
+    puts cmd.help
+    exit 0
+  end
+
+  command_description = "by default, rspec_n will guess the best command to run RSpec; " \
+    "override it by setting a custom command; wrap the entire command in single or double quotes; " \
+    "join multiple commands with '&&'"
+  option :c, :command, command_description, argument: :required
+
+  command_description =
+    "The order RSpec uses when running specs. Can be one of three values:                          \u00A0\n" \
+    "\u00A0\u00A0defined - Run specs in same order           \u00A0\n" \
+    "\u00A0\u00A0project - Let project decide                \u00A0\n" \
+    "\u00A0\u00A0rand    - Randomize specs (default)"
+  option :o, :order, command_description, argument: :required
+
+  flag :v, :version, 'show the current version' do |_value, _cmd|
+    puts RspecN::VERSION
+    exit 0
+  end
+
+  run do |options, args, _cmd|
+    require "rspec_n"
+    RspecN::Runner.new(options, args).start
+  end
+end
+# rubocop:enable Metrics/BlockLength
+
+begin
+  command.run(ARGV)
+  exit 0
+# Raised when the user specifies an argument incorrectly.
+rescue RspecN::BadArgument => e
+  warn e.message.colorize(:red)
+  exit 1
+rescue RspecN::BadOption => e
+  warn e.message.colorize(:red)
+  exit 1
+end

@@ -13,14 +13,6 @@ module RspecN
         @format = "%m/%d %l:%M:%S %p"
       end
 
-      def count
-        @runner.count
-      end
-
-      def command
-        @runner.command
-      end
-
       def observe
         write_table_header
         yield
