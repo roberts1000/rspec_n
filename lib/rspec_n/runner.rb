@@ -1,11 +1,11 @@
 module RspecN
   class Runner < Cri::CommandRunner
-    attr_reader :command, :iterations
+    attr_reader :command, :iterations, :runs
 
     def initialize(options, args)
-      input = Input.new(options, args)
-      @iterations = input.iterations
-      @command = input.command
+      @input = Input.new(options, args)
+      @iterations = @input.iterations
+      @command = @input.command
       @formatter = Formatters::TableFormatter.new(runner: self)
       initialize_runs
     end
@@ -23,6 +23,22 @@ module RspecN
       (total_duration_seconds / @iterations).floor
     end
 
+    def total_passed
+      @runs.values.select { |run| run.passed? }.size
+    end
+
+    def total_passed_with_warnings
+      @runs.values.select { |run| run.passed_with_warnings? }.size
+    end
+
+    def total_failed
+      @runs.values.select { |run| run.failed? }.size
+    end
+
+    def total_skipped
+      @runs.values.select { |run| run.skipped? }.size
+    end
+
     private
 
     def initialize_runs
@@ -31,19 +47,23 @@ module RspecN
     end
 
     def run_tests
+      found_failure = false
+
       @runs.each do |_iteration, run|
+        next run.skip if @input.stop_fast && found_failure
+
         run.start_clock
         @formatter.show_pre_run_info(run)
         run.go(@command)
         run.stop_clock
         @formatter.show_post_run_info(run)
+        found_failure ||= run.failed?
       end
     end
 
     def display_intro
-      iteration_part = "#{@iterations} times".colorize(:yellow)
-      command_part = command.to_s.colorize(:yellow)
-      puts "\nRSpec will execute #{iteration_part} using #{command_part}\n\n"
+      iteration_part = @iterations > 1 ? "#{@iterations} times" : "1 time"
+      puts "\nRSpec will execute #{iteration_part.colorize(:yellow)} using #{command.to_s.colorize(:yellow)}\n\n"
     end
   end
 end

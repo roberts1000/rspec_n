@@ -41,8 +41,12 @@ module RspecN
       def write_conclusion
         puts "-" * @table_width
         puts ""
-        puts "Total Duration:   #{convert_seconds_to_hms(@runner.total_duration_seconds)}"
-        puts "Average Duration: #{convert_seconds_to_hms(@runner.avg_duration_seconds)}"
+        puts "Total Duration:              #{convert_seconds_to_hms(@runner.total_duration_seconds)}"
+        puts "Average Duration:            #{convert_seconds_to_hms(@runner.avg_duration_seconds)}"
+        puts "Total Passed:                #{@runner.total_passed.to_s.colorize(:green)}"
+        puts "Total Passed with Warnings:  #{@runner.total_passed_with_warnings.to_s.colorize(:green)}"
+        puts "Total Failed:                #{@runner.total_failed.to_s.colorize(:red)}"
+        puts "Total Skipped:               #{@runner.total_skipped}"
         puts ""
       end
 
@@ -80,6 +84,7 @@ module RspecN
         when "Pass with Warnings" then "Pass with Warnings".colorize(:yellow)
         when "Pass" then "Pass".colorize(:green)
         when "Fail" then "Fail".colorize(:red)
+        when "Skip" then "Skip".colorize(:yellow)
         else "Unknown".colorize(:yellow)
         end
       end
