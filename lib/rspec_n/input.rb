@@ -1,6 +1,6 @@
 module RspecN
   class Input
-    attr_accessor :iterations, :command
+    attr_accessor :iterations, :command, :stop_fast
     def initialize(options, args)
       @args = args
       @options = options
@@ -9,6 +9,7 @@ module RspecN
       @iterations = determine_iterations
       @order = options.fetch(:order, "rand")
       @command = determine_command
+      @stop_fast = options.fetch(:"stop-fast", false)
     end
 
     private

@@ -12,6 +12,7 @@ module RspecN
       @rspec_stderr = nil
       @rspec_status = nil
       @status_string = nil
+      @skipped = false
     end
 
     def start_clock
@@ -37,6 +38,27 @@ module RspecN
       finish_time.strftime(format)
     end
 
+    def passed?
+      @status_string == "Pass"
+    end
+
+    def passed_with_warnings?
+      @status_string == "Pass with Warnings"
+    end
+
+    def skip
+      @skipped = true
+      @duration_seconds = 0
+    end
+
+    def skipped?
+      @skipped
+    end
+
+    def failed?
+      @status_string == "Fail"
+    end
+
     private
 
     def finalize_duration_seconds
@@ -51,6 +73,7 @@ module RspecN
     end
 
     def finalize_status_string
+      return @status_string = "Skip" if skipped?
       return @status_string = "Pass with Warnings" if @rspec_status.exitstatus.zero? && !@rspec_stderr.empty?
       return @status_string = "Pass" if @rspec_status.exitstatus.zero?
       return @status_string = "Fail" if !@rspec_status.exitstatus.zero?

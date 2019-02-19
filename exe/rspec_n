@@ -33,10 +33,12 @@ command = Cri::Command.define do
     exit 0
   end
 
-  command_description = "by default, rspec_n will guess the best command to run RSpec; " \
+  command_description = "By default, rspec_n will guess the best command to run RSpec; " \
     "override it by setting a custom command; wrap the entire command in single or double quotes; " \
     "join multiple commands with '&&'"
   option :c, :command, command_description, argument: :required
+
+  flag :s, "stop-fast", "Stop when an iteration reports a failure."
 
   command_description =
     "The order RSpec uses when running specs. Can be one of three values:                          \u00A0\n" \
