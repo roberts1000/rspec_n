@@ -1,6 +1,6 @@
 module RspecN
   class Input
-    attr_accessor :iterations, :command, :stop_fast
+    attr_accessor :iterations, :command, :stop_fast, :write_files
     def initialize(options, args)
       @args = args
       @options = options
@@ -10,6 +10,11 @@ module RspecN
       @order = options.fetch(:order, "rand")
       @command = determine_command
       @stop_fast = options.fetch(:"stop-fast", false)
+      @write_files = !options.fetch(:'no-file', false)
+    end
+
+    def write_files?
+      @write_files
     end
 
     private
