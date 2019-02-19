@@ -6,7 +6,7 @@ require "rspec_n/version"
 Gem::Specification.new do |spec|
   spec.name          = "rspec_n"
   spec.version       = RspecN::VERSION
-  spec.authors       = ["Roberts"]
+  spec.authors       = ["roberts1000"]
   spec.email         = ["roberts@corlewsolutions.com"]
 
   spec.summary       = "A ruby gem that runs RSpec N times."
@@ -17,8 +17,6 @@ Gem::Specification.new do |spec|
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
   # to allow pushing to a single host or delete this section to allow pushing to any host.
   if spec.respond_to?(:metadata)
-    spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
-
     spec.metadata["homepage_uri"] = spec.homepage
     spec.metadata["source_code_uri"] = "https://github.com/roberts1000/rspec_n"
     spec.metadata["changelog_uri"] = "https://github.com/roberts1000/rspec_n/blob/master/CHANGELOG.md"

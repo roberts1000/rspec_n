@@ -4,6 +4,10 @@ rspec_n is a Ruby gem that makes it easy to run a project's RSpec test suite N t
 
 ![sample](https://user-images.githubusercontent.com/2053901/52986788-d0bb7c80-33c6-11e9-9f13-0e191bdd2bb3.png)
 
+## Version Policy
+
+Releases are versioned using [semver 2.0.0](https://semver.org/spec/v2.0.0.html).
+
 ## Installation
 
 Install by executing
