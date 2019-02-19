@@ -22,6 +22,7 @@ module RspecN
     def validate_args
       return if @args.size.zero?
       raise BadArgument, @args.join(', ') if @args.empty? || !@args.first.all_digits?
+      raise BadArgument, @args.first if @args.first.to_i < 1
     end
 
     def validate_order
