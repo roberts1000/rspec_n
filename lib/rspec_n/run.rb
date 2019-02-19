@@ -1,6 +1,7 @@
 module RspecN
   class Run
-    attr_accessor :iteration, :start_time, :finish_time, :seed, :rspec_stdout, :rspec_stderr, :rspec_status, :duration_seconds, :status_string
+    attr_accessor :iteration, :start_time, :finish_time, :seed, :rspec_stdout, :rspec_stderr, :rspec_status, :duration_seconds,
+      :status_string
 
     def initialize(iteration:)
       @iteration = iteration
@@ -67,17 +68,20 @@ module RspecN
 
     def finalize_seed
       result = @rspec_stdout.match(/^Randomized with seed (\d*)/)
-      return if result.nil?  # A seed wasn't used
+      return if result.nil? # A seed wasn't used
 
       @seed = result.captures.first&.strip
     end
 
+    # rubocop:disable Style/NegatedIf
     def finalize_status_string
       return @status_string = "Skip" if skipped?
       return @status_string = "Pass with Warnings" if @rspec_status.exitstatus.zero? && !@rspec_stderr.empty?
       return @status_string = "Pass" if @rspec_status.exitstatus.zero?
       return @status_string = "Fail" if !@rspec_status.exitstatus.zero?
+
       @status_string = "Undetermined"
     end
+    # rubocop:enable Style/NegatedIf
   end
 end

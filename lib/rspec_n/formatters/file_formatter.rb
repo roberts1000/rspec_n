@@ -3,7 +3,7 @@ module RspecN
     class FileFormatter
       include RspecN::TimeHelpers
 
-      BASE_FILE_NAME = "rspec_n_iteration"
+      BASE_FILE_NAME = "rspec_n_iteration".freeze
 
       def initialize(runner:)
         @runner = runner
@@ -12,7 +12,7 @@ module RspecN
       end
 
       def delete_all_files
-        Dir.glob("#{BASE_FILE_NAME}.**").each { |file| File.delete(file)}
+        Dir.glob("#{BASE_FILE_NAME}.**").each { |file| File.delete(file) }
       end
 
       def write(run)
