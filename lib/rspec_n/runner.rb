@@ -1,18 +1,19 @@
 module RspecN
   class Runner < Cri::CommandRunner
-    attr_reader :command, :iterations, :runs
+    attr_reader :command, :input, :iterations, :runs
 
     def initialize(options, args)
       @input = Input.new(options, args)
       @iterations = @input.iterations
       @command = @input.command
-      @formatter = Formatters::TableFormatter.new(runner: self)
+      @display_formatter = Formatters::TableFormatter.new(runner: self)
+      @file_formatter = Formatters::FileFormatter.new(runner: self)
       initialize_runs
     end
 
     def start
       display_intro
-      @formatter.observe { run_tests }
+      @display_formatter.observe { run_tests }
     end
 
     def total_duration_seconds
@@ -53,11 +54,12 @@ module RspecN
         next run.skip if @input.stop_fast && found_failure
 
         run.start_clock
-        @formatter.show_pre_run_info(run)
+        @display_formatter.show_pre_run_info(run)
         run.go(@command)
         run.stop_clock
-        @formatter.show_post_run_info(run)
+        @display_formatter.show_post_run_info(run)
         found_failure ||= run.failed?
+        @file_formatter.write(run)
       end
     end
 

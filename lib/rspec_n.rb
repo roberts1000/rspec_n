@@ -14,6 +14,7 @@ require "rspec_n/constants"
 require "rspec_n/input"
 require "rspec_n/runner"
 require "rspec_n/run"
+require "rspec_n/formatters/file_formatter"
 require "rspec_n/formatters/table_formatter"
 
 # Setup pry for development when running "rake console". Guard against load

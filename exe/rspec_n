@@ -38,6 +38,8 @@ command = Cri::Command.define do
     "join multiple commands with '&&'"
   option :c, :command, command_description, argument: :required
 
+  flag nil, "no-file", "Do not write iteration output to files"
+
   flag :s, "stop-fast", "Stop when an iteration reports a failure."
 
   command_description =
