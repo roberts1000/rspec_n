@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Next Release
+## 1.0.0 (Sep 18, 2019)
 
 1. (New) Add initial core logic. (Issue #1)
 1. (New) Add initial CLI. (Issue #4)
