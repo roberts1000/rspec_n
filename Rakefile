@@ -6,6 +6,6 @@ RSpec::Core::RakeTask.new(:spec)
 task :default => :spec
 
 task :console do
-  exec "pry -r rspec_n -I ./lib"
-  # exec "irb -r rubocop_plus -I ./lib"
+  # exec "pry -r rspec_n -I ./lib"
+  exec "irb -r rspec_n -I ./lib"
 end
