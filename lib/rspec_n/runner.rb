@@ -25,19 +25,19 @@ module RspecN
     end
 
     def total_passed
-      @runs.values.select { |run| run.passed? }.size
+      @runs.values.select(&:passed?).size
     end
 
     def total_passed_with_warnings
-      @runs.values.select { |run| run.passed_with_warnings? }.size
+      @runs.values.select(&:passed_with_warnings?).size
     end
 
     def total_failed
-      @runs.values.select { |run| run.failed? }.size
+      @runs.values.select(&:failed?).size
     end
 
     def total_skipped
-      @runs.values.select { |run| run.skipped? }.size
+      @runs.values.select(&:skipped?).size
     end
 
     private
