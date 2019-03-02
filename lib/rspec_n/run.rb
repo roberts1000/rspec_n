@@ -1,19 +1,20 @@
 module RspecN
   class Run
-    attr_accessor :iteration, :start_time, :finish_time, :seed, :rspec_stdout, :rspec_stderr, :rspec_status, :duration_seconds,
-      :status_string
+    attr_accessor :duration_seconds, :finish_time, :iteration, :result_count_string, :rspec_stdout, :rspec_stderr, :rspec_status,
+      :seed, :status_string, :start_time
 
     def initialize(iteration:)
-      @iteration = iteration
-      @start_time = nil
-      @finish_time = nil
       @duration_seconds = nil
-      @seed = nil
+      @finish_time = nil
+      @iteration = iteration
+      @result_count_string = nil
       @rspec_stdout = nil
       @rspec_stderr = nil
       @rspec_status = nil
-      @status_string = nil
+      @seed = nil
       @skipped = false
+      @status_string = nil
+      @start_time = nil
     end
 
     def start_clock
@@ -25,6 +26,7 @@ module RspecN
       finalize_duration_seconds
       finalize_seed
       finalize_status_string
+      finalize_result_count_string
     end
 
     def go(command)
@@ -76,12 +78,17 @@ module RspecN
     # rubocop:disable Style/NegatedIf
     def finalize_status_string
       return @status_string = "Skip" if skipped?
-      return @status_string = "Pass with Warnings" if @rspec_status.exitstatus.zero? && !@rspec_stderr.empty?
+      return @status_string = "Pass (Warnings)" if @rspec_status.exitstatus.zero? && !@rspec_stderr.empty?
       return @status_string = "Pass" if @rspec_status.exitstatus.zero?
       return @status_string = "Fail" if !@rspec_status.exitstatus.zero?
 
       @status_string = "Undetermined"
     end
     # rubocop:enable Style/NegatedIf
+
+    def finalize_result_count_string
+      result = @rspec_stdout.match(/\d*\s+examples?,\s+\d*\s+failures?(,\s+\d*\s+pending)*/)
+      @result_count_string = result ? result.to_s : ""
+    end
   end
 end

@@ -3,4 +3,8 @@ class String
   def all_digits?
     self =~ /\A\d+\z/ ? true : false
   end
+
+  def remove_color
+    gsub(/\e\[(\d|;)+m/, "")
+  end
 end

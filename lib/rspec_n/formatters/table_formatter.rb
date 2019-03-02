@@ -7,7 +7,15 @@ module RspecN
 
       def initialize(runner:)
         @runner = runner
-        @columns = { "Run" => 8, "Start Time" => 22, "Finish Time" => 22, "Duration" => 13, "Seed" => 11, "Result" => 18 }
+        @columns = {
+          "Run" => 7,
+          "Start Time" => 21,
+          "Finish Time" => 21,
+          "Duration" => 12,
+          "Seed" => 9,
+          "Result" => 19,
+          "Result Counts" => 42
+        }
         @header_columns_string = padded_header_column_labels
         @table_width = @header_columns_string.size
         @format = "%m/%d %l:%M:%S %p"
@@ -28,7 +36,8 @@ module RspecN
         print pad_field("Finish Time", run.formatted_finish_time(@format))
         print duration_field(run)
         print seed_field(run)
-        puts result_field(run)
+        print result_field(run)
+        puts result_count_field(run)
       end
 
       private
@@ -65,7 +74,7 @@ module RspecN
 
       def pad_field(column_name, value)
         max_width = max_column_width_for(column_name)
-        value_size = value.to_s.size
+        value_size = value.to_s.remove_color.size
         pad_count = max_width - value_size
         value.to_s + (" " * pad_count)
       end
@@ -80,13 +89,29 @@ module RspecN
       end
 
       def result_field(run)
+        pad_field("Result", result_field_string(run))
+      end
+
+      def result_field_string(run)
         case run.status_string
-        when "Pass with Warnings" then "Pass with Warnings".colorize(:yellow)
+        when "Pass (Warnings)" then "Pass".colorize(:green) + " (Warnings)".colorize(:yellow)
         when "Pass" then "Pass".colorize(:green)
         when "Fail" then "Fail".colorize(:red)
         when "Skip" then "Skip".colorize(:yellow)
         else "Unknown".colorize(:yellow)
         end
+      end
+
+      def result_count_field(run)
+        result = run.result_count_string.match(/\d*\s+examples?/).to_s
+        failed_part = run.result_count_string.match(/\d*\s+failures?/).to_s
+        failed_count = failed_part.match(/\d*/).to_s.to_i
+        pending_part = run.result_count_string.match(/\d*\s+pending/)
+
+        result += ", "
+        result += failed_count.positive? ? failed_part.colorize(:red) : failed_part
+        result += ", " + pending_part.to_s.colorize(:yellow) if pending_part
+        result
       end
     end
   end
