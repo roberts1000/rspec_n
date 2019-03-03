@@ -8,7 +8,7 @@ require "rspec_n/helpers/time_helpers"
 require "rspec_n/helpers/core_ext/array"
 require "rspec_n/helpers/core_ext/string"
 
-require "rspec_n/errors"
+require "rspec_n/errors/bad_option"
 
 require "rspec_n/constants"
 require "rspec_n/input"
