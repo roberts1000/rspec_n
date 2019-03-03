@@ -22,43 +22,57 @@ The gem will install an exectuable called `rspec_n` on your system.  You may als
 
 ## Usage
 
-To run RSpec N times
+The simplest way to run rspec_n is to give it a positive integer which tells it how many times to run RSpec:
 
-    $ rspec_n N
+    $ rspec_n 5
 
-If your project has a `bin/start_rspec` file, rspec_n will invoke it to start RSpec (rspec_n assumes you have placed the necessary commands to cleanly start your test suite in that file). Otherwise, it will attempt to identify your project type and use best practices to start RSpec for your given project type.  The following is a list of project types supported by rspec_n, and the commands used when that project type is selected:
+As each iteration completes, output will be sent to the screen and dumped to a file.  If you need to examine the detailed output of a run, it is available in the output files.
 
-1. Ruby on Rails - `DISABLE_DATABASE_ENVIRONMENT_CHECK=1 RAILS_ENV=test bundle exec rake db:drop db:create db:migrate && bundle exec rspec`.
+You can also list one or more paths to target specs.  You can do anything you would normally do when giving RSpec paths:
 
-If it cannot guess a project type, rspec_n will invoke `bundle exec rspec`.  You can override this by specifying a command directly on the CLI.
+    $ rspec_n 5 spec/path/to/something_spec.rb
+    $ rspec_n 5 spec/path/to/folder spec/path/to/some/other/file_spec.rb
+    $ rspec_n 5 spec/path/to/folder
+    $ rspec_n 5 spec/path/to/something_spec.rb:5
+
+By default, `--order rand` is sent to RSpec to force it to run specs in random order.  You can use a `defined` order if you don't want randomness:
+
+    $ rspec_n 5 --order defined
+
+Or, let the configuration files in the project determine the order:
+
+    $ rspec_n 5 --order project
+
+#### Automatic Command Selection
+
+rspec_n will inspect the files in your project and pick the best way to start RSpec.  If it can't make an educated guess, it will use `bundle exec rspec` as the base command and add any extra information you've entered on the command line (like the order or paths).  The following is a list of project types that rspec_n can identify and the associated commands it will try to execute:
+
+1. Ruby on Rails Applications: `DISABLE_DATABASE_ENVIRONMENT_CHECK=1 RAILS_ENV=test bundle exec rake db:drop db:create db:migrate && bundle exec rspec`.
+2. Everything else: `bundle exec rspec`.
 
 #### Use Custom Command to Start RSpec
 
-By default, rspec_n will inspect the files in your project and pick the best way to start RSpec.  You can take control by using the `-c` option which lets you specify a custom command.  The following example deletes the `tmp` folder before starting RSpec:
+If you don't want rspec_n to automatically pick the best command, you can use the `-c` option and specify a command.  The following example deletes the `tmp` folder before starting RSpec:
 
     $ rspec_n 5 -c 'rm -rf tmp && bundle exec rspec'
 
-You must wrap your entire command string in single or double quotes if it contains spaces (which it probably will). This command will be invoked each time rspec_n attempts to start RSpec.
+There are couple points to consider:
 
-#### Control spec Order
+1. Wrap your entire command in a single or double quoted string so rspec_n can acturately determine the command.
+1. You can use the `&&` operator to join commands.
+1. rspec_n was partially created to help discover flaky test suites so it will add `--order rand` to a custom command even if don't specify the order.  You must explicitly use `--order defined` or `--order project` if you want something else.
 
-rspec_n provides three command line options for controlling the execution order of your specs.
-
-1. `--order rand`    - Passes `--order rand` to RSpec which causes RSpec to run your specs in a random order.
-1. `--order defined` - Passes `--order defined` to RSpec which causes RSpec to run your specs in the order that they are loaded by RSpec.
-1. `--order project` - Passes nothing to RSpec, which means the project configuration files will determine the order.
-
-If you do nothing, rspec_n will use `--order rand`.  This ensures the specs in your project are executed in random order for each iteration of RSpec.  rspec_n doesn't supply a seed when it start RSpec using a random strategy; it lets RSpec choose the seed and reports the values in the results.
-
-#### Control File Ouput
+#### Control File Output
 
 rspec_n writes output for each iteration in a sequence of files `rspec_n_iteration.1`, `rspec_n_iteration.2`, etc...  This saves you from having to rerun your test suite when you find a particular seed that causes your test suite to fail.  If you want to disable this, add the `--no-file` option to the command.
 
-**Note:** rspec_n deletes all files matching `rspec_n_iteration.*` when it starts so you must move those files to another location if you want to save them.
+    $ rspec_n 5 --no-file
+
+**Note:** rspec_n deletes all files matching `rspec_n_iteration.*` when it starts so be sure tomove those files to another location if you want to save them.
 
 #### Stop on First Failure
 
-You can tell rspec_n to abort when an iteration fails by using the `-s` flag.  Any remaining iterations will be skipped.
+You can tell rspec_n to abort the first time an iteration fails by using the `-s` flag.  Any remaining iterations will be skipped.
 
 ## Development
 

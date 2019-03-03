@@ -3,11 +3,12 @@ module RspecN
     attr_accessor :iterations, :command, :stop_fast, :write_files
     def initialize(options, args)
       @args = args
+      @unprocessed_args_array = args.entries
       @options = options
-      validate_args
-      validate_order
       @iterations = determine_iterations
-      @order = options.fetch(:order, "rand")
+      @spec_path = determine_spec_path
+      validate_order
+      @order = @options.fetch(:order, "rand")
       @command = determine_command
       @stop_fast = options.fetch(:"stop-fast", false)
       @write_files = !options.fetch(:'no-file', false)
@@ -19,12 +20,6 @@ module RspecN
 
     private
 
-    def validate_args
-      return if @args.size.zero?
-      raise BadArgument, @args.join(', ') if @args.empty? || !@args.first.all_digits?
-      raise BadArgument, @args.first if @args.first.to_i < 1
-    end
-
     def validate_order
       return unless (order = @options.fetch(:order, nil))
 
@@ -32,13 +27,24 @@ module RspecN
     end
 
     def determine_iterations
-      @args.empty? ? RspecN::DEFAULT_ITERATIONS : @args.first.to_i
+      value = @unprocessed_args_array.detect { |arg| arg.all_digits? }
+
+      if value
+        @unprocessed_args_array.delete(value)
+        value.to_i
+      else
+        RspecN::DEFAULT_ITERATIONS
+      end
+    end
+
+    def determine_spec_path
+      @unprocessed_args_array.empty? ? nil : @unprocessed_args_array.join(" ")
     end
 
     def determine_command
-      return @options[:command] if @options.fetch(:command, nil)
-
-      guessed_command + " --order " + @order
+      command = @options.fetch(:command, guessed_command)
+      command += " " + @spec_path if @spec_path
+      command += " --order " + @order
     end
 
     def guessed_command

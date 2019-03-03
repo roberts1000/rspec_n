@@ -16,7 +16,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 require "cri"
 require "rspec_n/constants"
-require "rspec_n/errors"
+require "rspec_n/errors/bad_option"
 
 # rubocop:disable Metrics/BlockLength
 command = Cri::Command.define do
@@ -64,10 +64,6 @@ end
 begin
   command.run(ARGV)
   exit 0
-# Raised when the user specifies an argument incorrectly.
-rescue RspecN::BadArgument => e
-  warn e.message.colorize(:red)
-  exit 1
 rescue RspecN::BadOption => e
   warn e.message.colorize(:red)
   exit 1
