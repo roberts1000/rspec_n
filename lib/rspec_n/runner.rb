@@ -55,7 +55,7 @@ module RspecN
         run.stop_clock
         @display_formatter.show_post_run_info(run)
         found_failure ||= run.failed?
-        @file_formatter.write(run)
+        @file_formatter.write(run, @command)
       end
     end
 

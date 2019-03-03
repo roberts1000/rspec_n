@@ -15,7 +15,7 @@ module RspecN
         Dir.glob("#{BASE_FILE_NAME}.**").each { |file| File.delete(file) }
       end
 
-      def write(run)
+      def write(run, command)
         return if run.skipped?
         return unless @runner.input.write_files?
 
@@ -25,7 +25,8 @@ module RspecN
           f.write("Iteration: #{run.iteration}\n")
           f.write("Start Time: #{run.formatted_start_time(@format)}\n")
           f.write("Finish Time: #{run.formatted_finish_time(@format)}\n")
-          f.write("Duration: #{convert_seconds_to_hms(run.duration_seconds)}\n\n")
+          f.write("Duration: #{convert_seconds_to_hms(run.duration_seconds)}\n")
+          f.write("Command: #{command}\n\n")
           f.write(run.rspec_stdout)
           f.write(run.rspec_stderr)
         end

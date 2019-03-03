@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Next Release
+
+1. (New) Write the command that was used to run rspec_n to the output files.  ([Issue #26](https://github.com/roberts1000/rspec_n/issues/26))
+
 ## 1.1.0 (Mar 03, 2019)
 
 1. (New) Add **Result Counts** column which shows the result counts for each run (e.g. "400 examples, 2 failures, 3 pending" ).  ([Issue #19](https://github.com/roberts1000/rspec_n/issues/19))
