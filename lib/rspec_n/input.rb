@@ -27,7 +27,7 @@ module RspecN
     end
 
     def determine_iterations
-      value = @unprocessed_args_array.detect { |arg| arg.all_digits? }
+      value = @unprocessed_args_array.detect(&:all_digits?)
 
       if value
         @unprocessed_args_array.delete(value)
@@ -44,7 +44,7 @@ module RspecN
     def determine_command
       command = @options.fetch(:command, guessed_command)
       command += " " + @spec_path if @spec_path
-      command += " --order " + @order
+      command + " --order " + @order
     end
 
     def guessed_command
