@@ -4,6 +4,7 @@
 
 1. (New) Add **Result Counts** column which shows the result counts for each run (e.g. "400 examples, 2 failures, 3 pending" ).  (Issue #19)
 1. (New) Allow an optional path argument, that is passed to RSpec, to target specs (e.g. `rspec_n 3 spec/features/example_spec.rb`, `rspec_n spec/features/example_spec.rb:5`, `rspec_n spec/features 4`).  (Issue #20)
+1. (New) Rename the `Result Counts` column to `Results` and remove the existing `Results` column.  (Issue #23)
 
 ## 1.0.0 (Sep 18, 2019)
 

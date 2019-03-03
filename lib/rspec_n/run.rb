@@ -6,6 +6,7 @@ module RspecN
     def initialize(iteration:)
       @duration_seconds = nil
       @finish_time = nil
+      @has_warnings = nil
       @iteration = iteration
       @result_count_string = nil
       @rspec_stdout = nil
@@ -27,6 +28,7 @@ module RspecN
       finalize_seed
       finalize_status_string
       finalize_result_count_string
+      finalize_has_warnings
     end
 
     def go(command)
@@ -41,12 +43,12 @@ module RspecN
       finish_time.strftime(format)
     end
 
-    def passed?
-      @status_string == "Pass"
+    def has_warnings?
+      @has_warnings
     end
 
-    def passed_with_warnings?
-      @status_string == "Pass with Warnings"
+    def passed?
+      @status_string == "Pass"
     end
 
     def skip
@@ -78,7 +80,6 @@ module RspecN
     # rubocop:disable Style/NegatedIf
     def finalize_status_string
       return @status_string = "Skip" if skipped?
-      return @status_string = "Pass (Warnings)" if @rspec_status.exitstatus.zero? && !@rspec_stderr.empty?
       return @status_string = "Pass" if @rspec_status.exitstatus.zero?
       return @status_string = "Fail" if !@rspec_status.exitstatus.zero?
 
@@ -89,6 +90,10 @@ module RspecN
     def finalize_result_count_string
       result = @rspec_stdout.match(/\d*\s+examples?,\s+\d*\s+failures?(,\s+\d*\s+pending)*/)
       @result_count_string = result ? result.to_s : ""
+    end
+
+    def finalize_has_warnings
+      @has_warnings = @rspec_status.exitstatus.zero? && !@rspec_stderr.empty?
     end
   end
 end

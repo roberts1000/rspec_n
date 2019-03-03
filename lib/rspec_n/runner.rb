@@ -28,10 +28,6 @@ module RspecN
       @runs.values.select(&:passed?).size
     end
 
-    def total_passed_with_warnings
-      @runs.values.select(&:passed_with_warnings?).size
-    end
-
     def total_failed
       @runs.values.select(&:failed?).size
     end
