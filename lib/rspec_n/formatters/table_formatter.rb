@@ -48,11 +48,11 @@ module RspecN
       def write_conclusion
         puts "-" * @table_width
         puts ""
-        puts "Total Duration:              #{convert_seconds_to_hms(@runner.total_duration_seconds)}"
-        puts "Average Duration:            #{convert_seconds_to_hms(@runner.avg_duration_seconds)}"
-        puts "Total Passed:                #{@runner.total_passed.to_s.colorize(:green)}"
-        puts "Total Failed:                #{@runner.total_failed.to_s.colorize(:red)}"
-        puts "Total Skipped:               #{@runner.total_skipped}"
+        puts "Total Duration:      #{convert_seconds_to_hms(@runner.total_duration_seconds)}"
+        puts "Avg Run Duration:    #{convert_seconds_to_hms(@runner.avg_duration_seconds)}"
+        puts "Runs Passed:         #{@runner.total_passed.to_s.colorize(:green)}"
+        puts "Runs Failed:         #{@runner.total_failed.to_s.colorize(:red)}"
+        puts "Runs Skipped:        #{@runner.total_skipped}"
         puts ""
       end
 

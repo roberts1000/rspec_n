@@ -2,7 +2,7 @@
 
 rspec_n is a Ruby gem that makes it easy to run a project's RSpec test suite N times.  You can customize the command that is used to start RSpec, or let rspec_n guess the best command (based on the files in your project).  rspec_n is useful for finding repeatability or flakiness issues in automated test suites.
 
-![sample](https://user-images.githubusercontent.com/2053901/52986788-d0bb7c80-33c6-11e9-9f13-0e191bdd2bb3.png)
+![example](https://user-images.githubusercontent.com/2053901/53691471-c6956880-3d4c-11e9-8248-68bbb4c24786.png)
 
 ## Version Policy
 
@@ -73,6 +73,12 @@ rspec_n writes output for each iteration in a sequence of files `rspec_n_iterati
 #### Stop on First Failure
 
 You can tell rspec_n to abort the first time an iteration fails by using the `-s` flag.  Any remaining iterations will be skipped.
+
+## Understanding the Results
+
+rspec_n uses the STDOUT, STDERR and EXIT STATUS of the `rspec` command  to figure out what to show in the **Results** column.  The general results are determined by finding the line in RSpec's STDOUT that says `xyz examples, xyz failures, xyz pending`.  rspec_n considers the run to be successful if RSpec returns an EXIT STATUS of 0 **regardless of any content in the STDERR stream**; it considers the run to be a failure if RSpec's EXIT STATUS > 0.
+
+There are times when RSpec's STDERR might have content, even though it returns an EXIT STATUS of 0. This frequently happens with deprecation notices and RSpec itself will pass the test suite in this situation. Unfortunately, it's not uncommon for code to write messages that look like errors to STDERR, but not actually raise an error and cause RSpec to fail a spec example.  rspec_n reports this situation by adding a `(Warning)` label to the results to indicate there's something extra in the STDERR that you might want to investigate.
 
 ## Development
 
