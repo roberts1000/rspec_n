@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Next Release
+
+1. (Fix) Make `-v` and `--version` work again.  ([Issue #30](https://github.com/roberts1000/rspec_n/issues/30))
+
 ## 1.2.0 (Mar 03, 2019)
 
 1. (New) Write the command that was used to run rspec_n to the output files.  ([Issue #26](https://github.com/roberts1000/rspec_n/issues/26))
