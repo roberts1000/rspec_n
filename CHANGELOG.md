@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Next Release
+
+1. (New) Add Gemfile usage instructions to the README.  ([Issue #36](https://github.com/roberts1000/rspec_n/issues/36))
+
 ## 1.2.1 (Mar 06, 2019)
 
 1. (Fix) Make `-v` and `--version` work again.  ([Issue #30](https://github.com/roberts1000/rspec_n/issues/30))
