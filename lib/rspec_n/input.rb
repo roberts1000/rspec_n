@@ -44,7 +44,8 @@ module RspecN
     def determine_command
       command = @options.fetch(:command, guessed_command)
       command += " " + @spec_path if @spec_path
-      command + " --order " + @order
+      command += " --order " + @order if should_append_order?(command)
+      command
     end
 
     def guessed_command
@@ -62,6 +63,10 @@ module RspecN
     def project_is_rails_based?
       app_file_name = "config/application.rb"
       File.file?(app_file_name) && File.readlines(app_file_name).grep(/Rails::Application/).any?
+    end
+
+    def should_append_order?(command)
+      command.match(/--order/).nil?
     end
   end
 end
