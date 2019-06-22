@@ -66,6 +66,8 @@ module RspecN
     end
 
     def should_append_order?(command)
+      return false if @order == "project"
+
       command.match(/--order/).nil?
     end
   end
