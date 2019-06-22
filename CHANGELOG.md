@@ -5,6 +5,7 @@
 1. (New) Add Gemfile usage instructions to the README.  ([Issue #36](https://github.com/roberts1000/rspec_n/issues/36))
 1. (New) Remove locking to a specify version of Ruby in development.  ([Issue #41](https://github.com/roberts1000/rspec_n/issues/41))
 1. (New) Use pry 0.12.x for development.  ([Issue #43](https://github.com/roberts1000/rspec_n/issues/43))
+1. (New) Stop `--order rand` from being added to the final command when a custom order is specified.  ([Issue #38](https://github.com/roberts1000/rspec_n/issues/38))
 
 ## 1.2.1 (Mar 06, 2019)
 
