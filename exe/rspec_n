@@ -15,6 +15,7 @@ lib = File.expand_path('../lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 require "cri"
+require "fileutils"
 require "rspec_n/version"
 require "rspec_n/constants"
 require "rspec_n/errors/bad_option"
@@ -40,6 +41,13 @@ command = Cri::Command.define do
   option :c, :command, command_description, argument: :required
 
   flag nil, "no-file", "Do not write iteration output to files"
+
+  flag nil, "timestamp", "Write iteration output to a timestamped directory, which can " \
+    "prevent accidental loss. NOTE: It is up to the user to periodically clean up files."
+
+  command_description = "Write iteration output to files in the provided directory " \
+    "rather than the current working directory. Can be used along with the timestamp flag."
+  option :d, :dir, command_description, argument: :required
 
   flag :s, "stop-fast", "Stop when an iteration reports a failure."
 
