@@ -12,16 +12,19 @@ module RspecN
       end
 
       def delete_all_files
-        Dir.glob("#{BASE_FILE_NAME}.**").each { |file| File.delete(file) }
+        log_directory = Pathname.new(@runner.input.log_path)
+        Dir.glob(log_directory.join("#{BASE_FILE_NAME}.**")).each { |file| File.delete(file) }
       end
 
       def write(run, command)
         return if run.skipped?
         return unless @runner.input.write_files?
 
-        file_name = "#{BASE_FILE_NAME}.#{run.iteration}"
+        log_directory = Pathname.new(@runner.input.log_path)
+        FileUtils.mkdir_p(log_directory)
+        file_path = log_directory.join("#{BASE_FILE_NAME}.#{run.iteration}")
 
-        File.open(file_name, "w") do |f|
+        File.open(file_path, "w") do |f|
           f.write("Iteration: #{run.iteration}\n")
           f.write("Start Time: #{run.formatted_start_time(@format)}\n")
           f.write("Finish Time: #{run.formatted_finish_time(@format)}\n")

@@ -1,6 +1,6 @@
 module RspecN
   class Input
-    attr_accessor :iterations, :command, :stop_fast, :write_files
+    attr_accessor :iterations, :command, :stop_fast, :write_files, :log_path
     def initialize(options, args)
       @args = args
       @unprocessed_args_array = args.entries
@@ -12,6 +12,8 @@ module RspecN
       @command = determine_command
       @stop_fast = options.fetch(:"stop-fast", false)
       @write_files = !options.fetch(:'no-file', false)
+      @timestamp = options.fetch(:timestamp, false)
+      @log_path = determine_log_path
     end
 
     def write_files?
@@ -69,6 +71,15 @@ module RspecN
       return false if @order == "project"
 
       command.match(/--order/).nil?
+    end
+
+    def determine_log_path
+      log_path = Pathname.new(@options.fetch(:dir, Dir.pwd))
+      return log_path unless @timestamp
+
+      directory_name = File.basename($PROGRAM_NAME)
+      directory_name << "-#{Time.now.getlocal.strftime('%Y%m%d%H%M%S%L')}"
+      log_path.join(directory_name)
     end
   end
 end
