@@ -25,15 +25,15 @@ module RspecN
     end
 
     def total_passed
-      @runs.values.select(&:passed?).size
+      @runs.values.count(&:passed?)
     end
 
     def total_failed
-      @runs.values.select(&:failed?).size
+      @runs.values.count(&:failed?)
     end
 
     def total_skipped
-      @runs.values.select(&:skipped?).size
+      @runs.values.count(&:skipped?)
     end
 
     private
