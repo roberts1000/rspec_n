@@ -3,6 +3,7 @@
 ## Next Release
 
 1. (New) Make `--order project` work. ([Issue #49](https://github.com/roberts1000/rspec_n/issues/49))
+1. (New) Add folder output options. ([Issue #55](https://github.com/roberts1000/rspec_n/issues/55))
 
 ## Next Release
 
