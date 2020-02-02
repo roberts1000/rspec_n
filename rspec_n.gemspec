@@ -39,6 +39,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "pry", "~> 0.12.0"
   spec.add_development_dependency "rake", "~> 12.0"
   spec.add_development_dependency "rspec", "~> 3.0"
+  spec.add_development_dependency "rubocop_plus", "~> 1.0"
 
   spec.add_dependency "colorize", "~> 0.8.0"
   spec.add_dependency "cri", "~> 2.15.3"
