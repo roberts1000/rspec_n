@@ -2,6 +2,10 @@
 
 Issues are tracked at https://github.com/roberts1000/rubocop_plus/issues. Changes marked as **(Internal)** support development/refactoring.
 
+## Next Release
+
+[#61](../../issues/61): Add `rubocop_plus` `~> 1.0` to gemspec. **(Internal)**
+
 ## 1.3.0 (Jan 13, 2020)
 
 [#49](../../issues/49): Make `--order project` work.
