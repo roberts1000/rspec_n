@@ -7,6 +7,7 @@ Issues are tracked at https://github.com/roberts1000/rubocop_plus/issues. Change
 [#61](../../issues/61): Add `rubocop_plus` `~> 1.0` to gemspec. **(Internal)**
 [#64](../../issues/64): Use `pry` `~> 0.13.0`. **(Internal)**
 [#66](../../issues/66): Update ruby & bundler versions in `.travis.yml`. **(Internal)**
+[#68](../../issues/68): Make Ruby 2.5 the minimum supported version.
 
 ## 1.3.0 (Jan 13, 2020)
 
