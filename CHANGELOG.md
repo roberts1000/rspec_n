@@ -5,6 +5,7 @@ Issues are tracked at https://github.com/roberts1000/rubocop_plus/issues. Change
 ## Next Release
 
 [#61](../../issues/61): Add `rubocop_plus` `~> 1.0` to gemspec. **(Internal)**
+[#64](../../issues/64): Use `pry` `~> 0.13.0`. **(Internal)**
 
 ## 1.3.0 (Jan 13, 2020)
 
