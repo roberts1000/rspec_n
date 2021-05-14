@@ -3,6 +3,7 @@ require "rspec_n/version"
 require "colorize"
 require "cri"
 require "open3"
+require "pathname"
 
 require "rspec_n/helpers/time_helpers"
 require "rspec_n/helpers/core_ext/array"
