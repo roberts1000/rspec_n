@@ -7,7 +7,7 @@ Issues are tracked at https://github.com/roberts1000/rubocop_plus/issues. Change
 1. [#61](../../issues/61): Add `rubocop_plus` `~> 1.0` to gemspec. **(Internal)**
 1. [#64](../../issues/64): Use `pry` `~> 0.13.0`. **(Internal)**
 1. [#66](../../issues/66): Update ruby & bundler versions in `.travis.yml`. **(Internal)**
-1. [#68](../../issues/68): Make Ruby 2.5 the minimum supported version.
+1. [#68](../../issues/68): Make Ruby 2.6 the minimum supported version.
 1. [#73](../../issues/73): Use `rake` `~> 13.0`. **(Internal)**
 1. [#78](../../issues/78): Require `Pathname`.
 
