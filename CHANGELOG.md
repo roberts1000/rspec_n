@@ -2,9 +2,8 @@
 
 Issues are tracked at https://github.com/roberts1000/rubocop_plus/issues. Changes marked as **(Internal)** support development/refactoring.
 
-## Next Release
+## 1.4.0 (May 16, 2021)
 
-1. [#61](../../issues/61): Add `rubocop_plus` `~> 1.0` to gemspec. **(Internal)**
 1. [#64](../../issues/64): Use `pry` `~> 0.14.0`. **(Internal)**
 1. [#66](../../issues/66): Update ruby & bundler versions in `.travis.yml`. **(Internal)**
 1. [#68](../../issues/68): Make Ruby 2.6 the minimum supported version.
