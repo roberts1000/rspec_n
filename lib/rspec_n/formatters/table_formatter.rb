@@ -62,7 +62,7 @@ module RspecN
       end
 
       def padded_header_column_labels
-        columns.collect { |name, max_width| padded_header_column_label(name, max_width) }.join("")
+        columns.collect { |name, max_width| padded_header_column_label(name, max_width) }.join
       end
 
       def max_column_width_for(name)
@@ -92,10 +92,8 @@ module RspecN
 
       def result_color_symbol(run)
         case run.status_string
-        when "Pass (Warnings)" then :green
-        when "Pass" then :green
+        when "Pass", "Pass (Warnings)" then :green
         when "Fail" then :red
-        when "Skip" then :yellow
         else :yellow
         end
       end
