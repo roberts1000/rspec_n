@@ -1,6 +1,7 @@
 module RspecN
   class Input
     attr_accessor :iterations, :command, :stop_fast, :write_files, :log_path
+
     def initialize(options, args)
       @args = args
       @unprocessed_args_array = args.entries
@@ -23,7 +24,8 @@ module RspecN
     private
 
     def validate_order
-      return unless (order = @options.fetch(:order, nil))
+      order = @options.fetch(:order, nil)
+      return unless order
 
       raise BadOption, order unless RspecN::ALLOWED_ORDER_OPTIONS.include?(order)
     end
@@ -45,8 +47,8 @@ module RspecN
 
     def determine_command
       command = @options.fetch(:command, guessed_command)
-      command += " " + @spec_path if @spec_path
-      command += " --order " + @order if should_append_order?(command)
+      command += " #{@spec_path}" if @spec_path
+      command += " --order #{@order}" if should_append_order?(command)
       command
     end
 
@@ -70,7 +72,7 @@ module RspecN
     def should_append_order?(command)
       return false if @order == "project"
 
-      command.match(/--order/).nil?
+      !command.include?("--order")
     end
 
     def determine_log_path
