@@ -1,0 +1,55 @@
+# This workflow will download prebuilt Ruby versions, install dependencies and run checks against Pull Requests.
+
+name: Check Pull Request
+on:
+  pull_request:
+    branches: [ master ]
+env:
+  # The pull request can have less than, or equal to, this number of rubocop issues and pass.
+  RUBOCOP_ISSUE_THRESHOLD: 5
+jobs:
+  rspec:
+    name: Run RSpec
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby-version: ['2.6', '2.7', '3.0']
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Ruby
+        # To automatically get bug fixes and new Ruby versions for ruby/setup-ruby,
+        # change this to (see https://github.com/ruby/setup-ruby#versioning):
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby-version }}
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+      - name: Execute rspec command
+        run: bundle exec rspec
+  rubocop:
+    name: Run Rubocop
+    runs-on: ubuntu-latest
+    needs: rspec
+    strategy:
+      matrix:
+        ruby-version: ['2.6']
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Ruby
+        # To automatically get bug fixes and new Ruby versions for ruby/setup-ruby,
+        # change this to (see https://github.com/ruby/setup-ruby#versioning):
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby-version }}
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+      - name: Execute rubo command
+        run: bundle exec rubo
+      - name: Evaluate rubo threshold
+        run: |
+          count=$(cat rubocop/total-violations-count.txt)
+          if [[ "$count" -gt $RUBOCOP_ISSUE_THRESHOLD ]]; then
+              echo "Failure: Found $count RuboCop issue(s). It must have $RUBOCOP_ISSUE_THRESHOLD or less. \
+          Run 'rubo' and resolve the issues listed in rubocop/style-issues.html"
+              exit 1
+          else
+              echo "Sucess: Found $count RuboCop issue(s), which is less than the limit of $RUBOCOP_ISSUE_THRESHOLD"
+          fi
