@@ -2,6 +2,10 @@
 
 Issues are tracked at https://github.com/roberts1000/rubocop_plus/issues. Changes marked as **(Internal)** support development/refactoring.
 
+## Next Release
+
+1. [#87](../../issues/87): Add GitHub action workflow to check pull requests. **(Internal)**
+
 ## 1.4.0 (May 16, 2021)
 
 1. [#64](../../issues/64): Use `pry` `~> 0.14.0`. **(Internal)**
