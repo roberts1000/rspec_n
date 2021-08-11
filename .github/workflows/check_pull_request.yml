@@ -28,7 +28,6 @@ jobs:
   rubocop:
     name: Run Rubocop
     runs-on: ubuntu-latest
-    needs: rspec
     strategy:
       matrix:
         ruby-version: ['2.6']
@@ -51,5 +50,5 @@ jobs:
           Run 'rubo' and resolve the issues listed in rubocop/style-issues.html"
               exit 1
           else
-              echo "Sucess: Found $count RuboCop issue(s), which is less than the limit of $RUBOCOP_ISSUE_THRESHOLD"
+              echo "Success: Found $count RuboCop issue(s), which is less than the limit of $RUBOCOP_ISSUE_THRESHOLD"
           fi
