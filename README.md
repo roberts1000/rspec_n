@@ -4,15 +4,15 @@ rspec_n is a Ruby gem that makes it easy to run a project's RSpec test suite N t
 
 ![example](https://user-images.githubusercontent.com/2053901/53691471-c6956880-3d4c-11e9-8248-68bbb4c24786.png)
 
-## Version Strategy
+## Versioning Strategy
 
-Releases are versioned using [semver 2.0.0](https://semver.org/spec/v2.0.0.html).
+Releases are versioned using [SemVer 2.0.0](https://semver.org/spec/v2.0.0.html) with the following caveats:
 
-Ruby versions that reach EOL will be removed without a major version bump.
+1. Support for a Ruby version, that reaches EOL, is removed in a major or minor release.
 
 ## Supported Ruby Versions
 
-Ruby 2.6.0+ is supported.
+Ruby 2.6.0+
 
 ## Installation
 
@@ -129,7 +129,3 @@ Contributions are welcome. Please us the following process when submitting work:
 1. Fork the project.
 1. Create a branch. The name of the branch should start with the issue number that the branch will address.
 1. Submit the PR. In the PR comment (in the UI), add `Closes #xyz` or `Supports #xyz` where `xyz` is the issue number that the PR addresses. The title of the PR (in the UI) should start with `[PR for #xyz] `.
-
-## License
-
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).

@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
     spec.metadata["changelog_uri"] = "https://github.com/roberts1000/rspec_n/blob/master/CHANGELOG.md"
   else
     raise "RubyGems 2.0 or newer is required to protect against " \
-      "public gem pushes."
+          "public gem pushes."
   end
 
   # Specify which files should be added to the gem when it is released.
@@ -39,7 +39,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "pry", "~> 0.14.0"
   spec.add_development_dependency "rake", "~> 13.0"
   spec.add_development_dependency "rspec", "~> 3.0"
-  spec.add_development_dependency "rubocop_plus", "~> 2.0"
 
   spec.add_dependency "colorize", "~> 0.8.0"
   spec.add_dependency "cri", "~> 2.15.3"
