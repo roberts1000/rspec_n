@@ -1,5 +1,15 @@
+# DO NOT MODIFY THIS FILE unless you want to deviate from the rubocop_plus ruleset.
+
+# This file defines the settings used by rubocop when it runs. You would normally add your customizations directly to this
+# file, but this file has been pre configured to read settings out of the rubocop_plus gem instead.
+
+# Tell rubocop to load its settings from the rubocop_plus gem.
+
 inherit_gem:
   rubocop_plus: config/rubocop.yml
+
+# Place custom settings below this comment. All customizations will OVERRIDE rubocop_plus rules. rubocop_plus & rubocop
+# do not attempt to merge these settings with their defaults. Long term changes should be ported to the rubocop_plus gem.
 
 AllCops:
   TargetRubyVersion: 2.6

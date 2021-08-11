@@ -24,11 +24,11 @@ require "rspec_n/errors/bad_option"
 command = Cri::Command.define do
   usage       'rspec_n [iterations] [options]'
   description "rspec_n is an executable installed by the rspec_n Ruby gem.  It provides a " \
-    "way to re-run an RSpec test suite 'N' times, which is useful when determining " \
-    "if a test suite is consistent.\n\n" \
-    "STATUS CODES\n\n" \
-    "0 - rspec_n ran successfully                                            \u00A0\n" \
-    "1 - problem with the commandline options                                \u00A0"
+              "way to re-run an RSpec test suite 'N' times, which is useful when determining " \
+              "if a test suite is consistent.\n\n" \
+              "STATUS CODES\n\n" \
+              "0 - rspec_n ran successfully                                            \u00A0\n" \
+              "1 - problem with the commandline options                                \u00A0"
 
   flag :h, :help, 'show help' do |_value, cmd|
     puts cmd.help
@@ -36,17 +36,17 @@ command = Cri::Command.define do
   end
 
   command_description = "By default, rspec_n will guess the best command to run RSpec; " \
-    "override it by setting a custom command; wrap the entire command in single or double quotes; " \
-    "join multiple commands with '&&'"
+                        "override it by setting a custom command; wrap the entire command in single or double quotes; " \
+                        "join multiple commands with '&&'"
   option :c, :command, command_description, argument: :required
 
   flag nil, "no-file", "Do not write iteration output to files"
 
   flag nil, "timestamp", "Write iteration output to a timestamped directory, which can " \
-    "prevent accidental loss. NOTE: It is up to the user to periodically clean up files."
+                         "prevent accidental loss. NOTE: It is up to the user to periodically clean up files."
 
   command_description = "Write iteration output to files in the provided directory " \
-    "rather than the current working directory. Can be used along with the timestamp flag."
+                        "rather than the current working directory. Can be used along with the timestamp flag."
   option :d, :dir, command_description, argument: :required
 
   flag :s, "stop-fast", "Stop when an iteration reports a failure."

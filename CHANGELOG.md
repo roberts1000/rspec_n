@@ -1,6 +1,6 @@
 # CHANGELOG
 
-Issues are tracked at https://github.com/roberts1000/rubocop_plus/issues. Changes marked as **(Internal)** support development/refactoring.
+Issues are tracked at https://github.com/roberts1000/rspec_n/issues. Issues marked as **(Internal)** only affect development.
 
 ## Next Release
 
@@ -10,7 +10,7 @@ Issues are tracked at https://github.com/roberts1000/rubocop_plus/issues. Change
 
 1. [#64](../../issues/64): Use `pry` `~> 0.14.0`. **(Internal)**
 1. [#66](../../issues/66): Update ruby & bundler versions in `.travis.yml`. **(Internal)**
-1. [#68](../../issues/68): Make Ruby 2.6 the minimum supported version.
+1. [#68](../../issues/68): Make Ruby 2.6.0 the minimum supported version.
 1. [#73](../../issues/73): Use `rake` `~> 13.0`. **(Internal)**
 1. [#78](../../issues/78): Require `Pathname`.
 1. [#83](../../issues/83): Use `rubocop_plus` `~> 2.0`. **(Internal)**
@@ -26,7 +26,7 @@ Issues are tracked at https://github.com/roberts1000/rubocop_plus/issues. Change
 1. [#36](../../issues/36): Add instructions for installing `rspec_n` in project Gemfiles.
 1. [#38](../../issues/38): Stop `--order rand` from being added to the final command when a custom order is specified.
 1. [#41](../../issues/41): Remove locking to a specify version of Ruby in development. **(Internal)**
-1. [#43](../../issues/43): Use pry 0.12.x for development. **(Internal)**
+1. [#43](../../issues/43): Use `pry` `0.12.x` for development. **(Internal)**
 
 ## 1.2.1 (Mar 06, 2019)
 
