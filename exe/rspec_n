@@ -18,6 +18,7 @@ require "cri"
 require "fileutils"
 require "rspec_n/version"
 require "rspec_n/constants"
+require "rspec_n/helpers/arguments_helper"
 require "rspec_n/errors/bad_option"
 
 # rubocop:disable Metrics/BlockLength
@@ -71,7 +72,7 @@ end
 # rubocop:enable Metrics/BlockLength
 
 begin
-  command.run(ARGV)
+  command.run(ArgumentsHelper.get_arguments)
   exit 0
 rescue RspecN::BadOption => e
   warn e.message.colorize(:red)
