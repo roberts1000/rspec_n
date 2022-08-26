@@ -1,6 +1,6 @@
 # rspec_n
 
-rspec_n is a Ruby gem that makes it easy to run a project's RSpec test suite N times. You can customize the command that is used to start RSpec, or let rspec_n guess the best command (based on the files in your project). rspec_n is useful for finding repeatability issues in automated test suites.
+rspec_n is a Ruby gem that makes it easy to run a project's RSpec test suite N times. You can customize the command that is used to start RSpec, or let rspec_n guess the best command (based on the files in your project). rspec_n is useful for finding repeatability issues in RSpec test suites.
 
 ![example](https://user-images.githubusercontent.com/2053901/53691471-c6956880-3d4c-11e9-8248-68bbb4c24786.png)
 
@@ -8,7 +8,7 @@ rspec_n is a Ruby gem that makes it easy to run a project's RSpec test suite N t
 
 Releases are versioned using [SemVer 2.0.0](https://semver.org/spec/v2.0.0.html) with the following caveats:
 
-1. Support for a Ruby version, that reaches EOL, is removed in a major or minor release.
+1. Support for Ruby versions, that reach EOL, can be removed in a major **or** minor release.
 
 ## Supported Ruby Versions
 
@@ -28,7 +28,7 @@ Add the following to your project's `.gitignore` to exclude the output generated
 
 #### Usage in a Gemfile
 
-If you want to add rspec_n to your Gemfile, use the `require: false` option so rspec_n files aren't loaded into your app. rspec_n doesn't provide any runtime benefit to apps and requiring it will add unnecessary code to your project. Also, rspec_n is designed as a standalone commandline tool and isn't tested for compatibility inside other apps.
+If you add rspec_n to your Gemfile, use the `require: false` option so rspec_n isn't loaded into your app. rspec_n doesn't provide any runtime benefit to apps and requiring it will add unnecessary code to your project. Also, rspec_n is designed as a standalone commandline tool and isn't tested for compatibility inside other apps.
 
 ```ruby
 gem 'rspec_n', require: false
@@ -40,26 +40,26 @@ The simplest way to run rspec_n is to give it a positive integer which tells it 
 
     $ rspec_n 5
 
-As each iteration completes, output is sent to the screen and dumped to a file. If you need to examine the detailed output of a run, it is available in the output files.
+As iterations complete, summary output is sent to the screen and detailed output is written to files (in the project's root).
 
-You can also list one or more paths to target specs. You can do anything you would normally do when giving RSpec paths:
+To target specific specs, provide one or more paths. You can do anything you would normally do when giving paths to RSpec:
 
     $ rspec_n 5 spec/path/to/something_spec.rb
     $ rspec_n 5 spec/path/to/folder spec/path/to/some/other/file_spec.rb
     $ rspec_n 5 spec/path/to/folder
     $ rspec_n 5 spec/path/to/something_spec.rb:5
 
-By default, `--order rand` is sent to RSpec to force it to run specs in random order. You can use a `defined` order if you don't want randomness:
+By default, `--order rand` is always sent to RSpec to force it to run specs in random order. You can use a `defined` order if you don't want randomness:
 
     $ rspec_n 5 --order defined
 
-Or, let the configuration files in the project determine the order:
+Or, let the RSpec configuration in the project determine the order:
 
     $ rspec_n 5 --order project
 
 #### Config file
 
-You can create `.rspec_n` file in your project's root, and add command line options to it. They'll be used if `rspec_n` is run without options.Options are any arguments that start with `-` or `--`. For example, `rspec_n 10 spec/some_spec.rb` will make rspec_n consider `.rspec_n`, but `rspec_n 10 -c "rm -rf /tmp/* && bundle exec rspec"` won't.
+You can create a `.rspec_n` file in your project's root and add command line options to it. They'll be used if `rspec_n` is run without options. Options are any arguments that start with `-` or `--`. For example, `rspec_n 10` or `rspec_n 10 spec/some_spec.rb` will make rspec_n consider `.rspec_n`, but `rspec_n 10 -c "rm -rf /tmp/* && bundle exec rspec"` won't.
 
 Example file format:
 
@@ -79,21 +79,21 @@ rspec_n inspects files in your project so it can pick the best way to start RSpe
 1. Ruby on Rails Applications: `DISABLE_DATABASE_ENVIRONMENT_CHECK=1 RAILS_ENV=test bundle exec rake db:drop db:create db:migrate && bundle exec rspec`.
 2. Everything else: `bundle exec rspec`.
 
-#### Use Custom Command to Start RSpec
+#### Use a Custom Command to Start RSpec
 
 Use the `-c` option if you want to specify your own command. The following example deletes the `tmp` folder before starting RSpec:
 
     $ rspec_n 5 -c 'rm -rf tmp && bundle exec rspec'
 
-There are couple points to consider:
+There are a couple points to consider:
 
 1. Wrap your entire command in a single or double quoted string.
-1. Use the `&&` operator to join commands.
-1. rspec_n was created to help discover flaky test suites so it adds `--order rand` to your custom command by default. You must use `--order defined` or `--order project` if you want something else.
+1. Use `&&` to create compound commands.
+1. Avoid trying to change test order within a custom command. rspec_n was created to help discover flaky test suites so it adds `--order rand` to your custom command. Use the `--order defined` or `--order project` options to the control the order. 
 
 #### Control File Output
 
-rspec_n writes output for each iteration in a sequence of files `rspec_n_iteration.1`, `rspec_n_iteration.2`, etc... If you want to disable this, add the `--no-file` option to the command.
+rspec_n writes output for each iteration to files with the iteration number (`rspec_n_iteration.1`, `rspec_n_iteration.2`, etc...). If you want to disable this, add the `--no-file` option to the command.
 
     $ rspec_n 5 --no-file
 
@@ -125,11 +125,11 @@ That's it!
 
 Run the automated test suite with:
 
-    $ rake spec
+    $ rspec
 
 ### Start a Console
 
-Choose one of the following to start a conole with the gem loaded:
+Choose one of the following to start a console with the gem loaded:
 
 ```bash
 $ bin/console  # for Pry
