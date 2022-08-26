@@ -12,7 +12,7 @@ inherit_gem:
 # do not attempt to merge these settings with their defaults. Long term changes should be ported to the rubocop_plus gem.
 
 AllCops:
-  TargetRubyVersion: 2.6
+  TargetRubyVersion: 2.7
 
 Style/Documentation:
   Enabled: false
