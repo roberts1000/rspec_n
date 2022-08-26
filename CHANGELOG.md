@@ -5,6 +5,7 @@ Issues are tracked at https://github.com/roberts1000/rspec_n/issues. Issues mark
 ## Next Release
 
 1. [#87](../../issues/87): Add GitHub action workflow to check pull requests. **(Internal)**
+1. [#93](../../issues/93): Make Ruby 2.7.0 the min supported Ruby.
 
 ## 1.4.0 (May 16, 2021)
 
