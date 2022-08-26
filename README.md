@@ -59,11 +59,12 @@ Or, let the configuration files in the project determine the order:
 
 #### Config file
 
-If you create a `.rspec_n` file in your project's root, you can put command line options inside it. They'll be used if `rspec_n` is run with no options. (i.e. `rspec_n 10 ./scpec/some_feature_spec.rb` will use `.rspec_n` file, but `rspec_n 10 -c "rm -rf /tmp/* && bundle exec rspec"` will ignore the `.rspec_n` file.)
+You can create `.rspec_n` file in your project's root, and add command line options to it. They'll be used if `rspec_n` is run without options.Options are any arguments that start with `-` or `--`. For example, `rspec_n 10 spec/some_spec.rb` will make rspec_n consider `.rspec_n`, but `rspec_n 10 -c "rm -rf /tmp/* && bundle exec rspec"` won't.
 
 Example file format:
 
-```--no-file
+```
+--no-file
 -s
 --order defined
 -c "rm -rf tmp && bundle exec rspec"
