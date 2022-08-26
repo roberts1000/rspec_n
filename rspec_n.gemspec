@@ -2,7 +2,6 @@ lib = File.expand_path("lib", __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "rspec_n/version"
 
-# rubocop:disable Metrics/BlockLength
 Gem::Specification.new do |spec|
   spec.name          = "rspec_n"
   spec.version       = RspecN::VERSION
@@ -43,4 +42,3 @@ Gem::Specification.new do |spec|
   spec.add_dependency "colorize", "~> 0.8.0"
   spec.add_dependency "cri", "~> 2.15.3"
 end
-# rubocop:enable Metrics/BlockLength

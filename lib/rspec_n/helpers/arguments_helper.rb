@@ -2,7 +2,7 @@ require 'shellwords'
 
 class ArgumentsHelper
   class << self
-    def get_arguments
+    def arguments
       if File.exist?(".rspec_n") && no_options_in_arguments?
         options = read_options_from_file
         if options.any?
@@ -13,11 +13,12 @@ class ArgumentsHelper
       ARGV
     end
 
-    # Read arguments from file only if no arguments provided by user
+    # Read arguments from the config file only if no arguments are provided by user
     def no_options_in_arguments?
-      ARGV.select{|a| a =~ /^\-/ }.empty? # Regex reads if an argument starts with - (so it's option)
+      ARGV.grep(/^-/).empty? # Match args that start with - (or --). Those are the options.
     end
 
+    # Options can be listed on a single line in the config file, or listed on separate lines.
     def read_options_from_file
       Shellwords.shellwords File.read(".rspec_n").to_s.gsub(/\n|\r\n/, " ")
     end
