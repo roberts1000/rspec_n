@@ -8,6 +8,7 @@ Issues are tracked at https://github.com/roberts1000/rspec_n/issues. Issues mark
 1. [#108](../../issues/108): Remove Ruby 2.7 support.
 1. [#110](../../issues/110): Add simple PR template.
 1. [#112](../../issues/112): Add Ruby 3.2 support.
+1. [#114](../../issues/114): Add Ruby 3.3 support.
 
 ## 1.5.0 (Aug 28, 2022)
 
