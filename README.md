@@ -4,6 +4,15 @@ rspec_n is a Ruby gem that makes it easy to run a project's RSpec test suite N t
 
 ![example](https://user-images.githubusercontent.com/2053901/53691471-c6956880-3d4c-11e9-8248-68bbb4c24786.png)
 
+#### Automatic Command Selection
+
+rspec_n inspects files in your project and determines the best way to start RSpec. If it can't make an educated guess, it will use `bundle exec rspec` as the base command and add any extra information you've entered on the command line (like the order or paths). The following is a list of project types that rspec_n can identify and the associated commands it will try to execute:
+
+1. Ruby on Rails Applications: `DISABLE_DATABASE_ENVIRONMENT_CHECK=1 RAILS_ENV=test bundle exec rake db:drop db:create db:migrate && bundle exec rspec`.
+2. Everything else: `bundle exec rspec`.
+
+**Note:** You can override this behavior by using the `-c` option, which lets you specify your own command. See the [Use a Custom Command to Start RSpec](#Use-a-Custom-Command-to-Start-RSpec) section for more info.
+
 ## Versioning Strategy
 
 Releases are versioned using [SemVer 2.0.0](https://semver.org/spec/v2.0.0.html) with the following caveats:
@@ -28,7 +37,7 @@ Add the following to your project's `.gitignore` to exclude the output generated
 
 #### Usage in a Gemfile
 
-If you add rspec_n to your Gemfile, use the `require: false` option so rspec_n isn't loaded into your app. rspec_n doesn't provide any runtime benefit to apps and requiring it will add unnecessary code to your project. Also, rspec_n is designed as a standalone commandline tool and isn't tested for compatibility inside other apps.
+If you add rspec_n to your Gemfile, use the `require: false` option so rspec_n isn't loaded into your app. rspec_n doesn't provide any runtime benefit to apps and requiring it will add unnecessary code to your project. Also, rspec_n is designed as a standalone command line tool and isn't tested for compatibility inside other apps.
 
 ```ruby
 gem 'rspec_n', require: false
@@ -36,13 +45,15 @@ gem 'rspec_n', require: false
 
 ## Usage
 
+### Basic Usage
+
 The simplest way to run rspec_n is to give it a positive integer which tells it how many times to run RSpec:
 
     $ rspec_n 5
 
 As iterations complete, summary output is sent to the screen and detailed output is written to files (in the project's root).
 
-To target specific specs, provide one or more paths. You can do anything you would normally do when giving paths to RSpec:
+To target specific specs, provide one or more paths. You can do anything you would normally do when passing paths to RSpec:
 
     $ rspec_n 5 spec/path/to/something_spec.rb
     $ rspec_n 5 spec/path/to/folder spec/path/to/some/other/file_spec.rb
@@ -57,29 +68,7 @@ Or, let the RSpec configuration in the project determine the order:
 
     $ rspec_n 5 --order project
 
-#### Config file
-
-You can create a `.rspec_n` file in your project's root and add command line options to it. They'll be used if `rspec_n` is run without options. Options are any arguments that start with `-` or `--`. For example, `rspec_n 10` or `rspec_n 10 spec/some_spec.rb` will make rspec_n consider `.rspec_n`, but `rspec_n 10 -c "rm -rf /tmp/* && bundle exec rspec"` won't.
-
-Example file format:
-
-```
---no-file
--s
---order defined
--c "rm -rf tmp && bundle exec rspec"
-```
-
-The config file can be multi line or single line.
-
-#### Automatic Command Selection
-
-rspec_n inspects files in your project so it can pick the best way to start RSpec. If it can't make an educated guess, it will use `bundle exec rspec` as the base command and add any extra information you've entered on the command line (like the order or paths). The following is a list of project types that rspec_n can identify and the associated commands it will try to execute:
-
-1. Ruby on Rails Applications: `DISABLE_DATABASE_ENVIRONMENT_CHECK=1 RAILS_ENV=test bundle exec rake db:drop db:create db:migrate && bundle exec rspec`.
-2. Everything else: `bundle exec rspec`.
-
-#### Use a Custom Command to Start RSpec
+### Use a Custom Command to Start RSpec
 
 Use the `-c` option if you want to specify your own command. The following example deletes the `tmp` folder before starting RSpec:
 
@@ -89,19 +78,42 @@ There are a couple points to consider:
 
 1. Wrap your entire command in a single or double quoted string.
 1. Use `&&` to create compound commands.
-1. Avoid trying to change test order within a custom command. rspec_n was created to help discover flaky test suites so it adds `--order rand` to your custom command. Use the `--order defined` or `--order project` options to the control the order. 
+1. rspec_n was created to help discover flaky test suites so it will add `--order rand` to your custom command (which gets passed to RSpec and causes RSpec to run tests randomly). If you need to change the test order, you must add the `--order defined` or `--order project` options to the control the order like this:
 
-#### Control File Output
+    ```
+    $ rspec_n 5 -c 'rm -rf tmp && bundle exec rspec' --order defined
+    ```
+   
+### Control the File Output
 
-rspec_n writes output for each iteration to files with the iteration number (`rspec_n_iteration.1`, `rspec_n_iteration.2`, etc...). If you want to disable this, add the `--no-file` option to the command.
+rspec_n writes output to the project's root folder, for each iteration, to files with the iteration number in the name (`rspec_n_iteration.1`, `rspec_n_iteration.2`, etc...). If you want to disable this, add the `--no-file` option to the command.
 
     $ rspec_n 5 --no-file
 
 **Note:** rspec_n deletes all files matching `rspec_n_iteration.*` when it starts, so be sure to move those files to another location if you want to save them.
 
-#### Stop on First Failure
+### Stop on First Failure
 
 You can tell rspec_n to abort the first time an iteration fails by using the `-s` flag. All remaining iterations are skipped.
+
+### Run Specs in Parallel
+
+rspec_n doesn't directly support running specs in parallel, however, you should be able to use the `-c` option to pass a rspec_n the command you use to run parallel specs.
+
+## Configuration
+
+You can create a `.rspec_n` file in your project's root and add command line options to it. They'll be used if `rspec_n` is run without options. Options are any arguments that start with `-` or `--`. For example, `rspec_n 10` or `rspec_n 10 spec/some_spec.rb` will make rspec_n consider `.rspec_n`, but `rspec_n 10 -c "rm -rf /tmp/* && bundle exec rspec"` won't.
+
+Example file format:
+
+```text
+--no-file
+-s
+--order defined
+-c "rm -rf tmp && bundle exec rspec"
+```
+
+The config file can be multi line or single line.
 
 ## Understanding the Results
 
