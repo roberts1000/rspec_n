@@ -46,7 +46,7 @@ module RspecN
     def run_tests
       found_failure = false
 
-      @runs.each do |_iteration, run|
+      @runs.each_value do |run|
         next run.skip if @input.stop_fast && found_failure
 
         run.start_clock
