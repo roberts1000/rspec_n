@@ -5,6 +5,7 @@ Issues are tracked at https://github.com/roberts1000/rspec_n/issues. Issues mark
 ## Next Release
 
 1. [#105](../../issues/105): Use `colorize ~> 1.1.0`.
+1. [#108](../../issues/108): Remove Ruby 2.7 support.
 
 ## 1.5.0 (Aug 28, 2022)
 
