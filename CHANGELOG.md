@@ -2,9 +2,9 @@
 
 Issues are tracked at https://github.com/roberts1000/rspec_n/issues. Issues marked as **(Internal)** only affect development.
 
-## Next Release
+## 1.6.0 (Feb 19, 2024)
 
-1. [#105](../../issues/105): Use `colorize ~> 1.1.0`.
+1. [#105](../../issues/105): Use `colorize ~> 1.1.0`. **(Internal)**
 1. [#108](../../issues/108): Remove Ruby 2.7 support.
 1. [#110](../../issues/110): Add simple PR template.
 1. [#112](../../issues/112): Add Ruby 3.2 support.
