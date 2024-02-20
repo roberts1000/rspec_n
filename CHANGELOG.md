@@ -2,6 +2,10 @@
 
 Issues are tracked at https://github.com/roberts1000/rspec_n/issues. Issues marked as **(Internal)** only affect development.
 
+## Next Release
+
+1. [#105](../../issues/105): Use `colorize ~> 1.1.0`.
+
 ## 1.5.0 (Aug 28, 2022)
 
 1. [#53](../../issues/53): Add support for a config file.
