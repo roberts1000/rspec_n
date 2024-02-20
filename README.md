@@ -12,7 +12,7 @@ Releases are versioned using [SemVer 2.0.0](https://semver.org/spec/v2.0.0.html)
 
 ## Supported Ruby Versions
 
-Ruby 2.7, 3.0 and 3.1.
+Ruby 3.0+ is supported.
 
 ## Installation
 
