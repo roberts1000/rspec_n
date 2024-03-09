@@ -2,6 +2,10 @@
 
 Issues are tracked at https://github.com/roberts1000/rspec_n/issues. Issues marked as **(Internal)** only affect development.
 
+## Next Release
+
+1. [#118](../../issues/118): Use `db:schema:load` to prepare databases instead of `db:migrate`.
+
 ## 1.6.0 (Feb 19, 2024)
 
 1. [#105](../../issues/105): Use `colorize ~> 1.1.0`. **(Internal)**
