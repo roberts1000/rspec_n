@@ -45,6 +45,20 @@ gem 'rspec_n', require: false
 
 ## Usage
 
+### Considerations
+
+#### Ruby on Rails
+
+1. By default, rspec_n will attempt to prepare the test database by executing the following code **before each run**:
+
+    ```
+    DISABLE_DATABASE_ENVIRONMENT_CHECK=1 RAILS_ENV=test bundle exec rake db:drop db:create db:schema:load rake db:drop db:create db:schema:load
+    ```
+    
+    1. `DISABLE_DATABASE_ENVIRONMENT_CHECK=1` disables a Rails check that can prevent the test database from being dropped.
+    1. Since `db:schema:load` is used to prepare the test database, projects must have a correct `schema.rb` or `structure.sql`.
+1. By default, rspec_n tries to ensure an empty database **before each run** so it does not load seed files. If your test suite depends on seeded data, or other special setup, you will need to specify the exact command that rspec_n uses to invoke each run. See the [Use a Custom Command to Start RSpec](#Use-a-Custom-Command-to-Start-RSpec) section for more info.
+
 ### Basic Usage
 
 The simplest way to run rspec_n is to give it a positive integer which tells it how many times to run RSpec:
