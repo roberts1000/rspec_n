@@ -2,6 +2,10 @@
 
 Issues are tracked at https://github.com/roberts1000/rspec_n/issues. Issues marked as **(Internal)** only affect development.
 
+## Next Release
+
+1. [#124](../../issues/124): Remove Ruby 3.0 support.
+
 ## 2.0.0 (Mar 08, 2024)
 
 1. [#118](../../issues/118): Use `db:schema:load` to prepare databases instead of `db:migrate`.
