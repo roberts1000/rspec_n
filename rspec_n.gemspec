@@ -20,8 +20,7 @@ Gem::Specification.new do |spec|
     spec.metadata["source_code_uri"] = "https://github.com/roberts1000/rspec_n"
     spec.metadata["changelog_uri"] = "https://github.com/roberts1000/rspec_n/blob/master/CHANGELOG.md"
   else
-    raise "RubyGems 2.0 or newer is required to protect against " \
-          "public gem pushes."
+    raise "RubyGems 2.0 or newer is required to protect against public gem pushes."
   end
 
   # Specify which files should be added to the gem when it is released.
@@ -32,7 +31,7 @@ Gem::Specification.new do |spec|
   spec.bindir        = "exe"
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
-  spec.required_ruby_version = '>= 3.2'
+  spec.required_ruby_version = ">= 3.2"
 
   spec.add_dependency "colorize", "~> 1.1.0"
   spec.add_dependency "cri", "~> 2.15.3"
