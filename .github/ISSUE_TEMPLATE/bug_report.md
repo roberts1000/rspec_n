@@ -15,7 +15,7 @@ assignees: ''
 
 <!-- List the exact steps that can reproduce the behavior. -->
 
-## Expected behavior
+## Expected Behavior
 
 <!-- Explain the behavior you expected. -->
 

@@ -9,7 +9,8 @@ assignees: ''
 
 ## Overview
 
-<!-- Use https://github.com/roberts1000/rspec_n/security/advisories/new if you would prefer to submit a private issue. -->
+<!-- If you would prefer to submit a private issue, use: -->
+<!--   https://github.com/roberts1000/rspec_n/security/advisories/new -->
 <!-- Otherwise, provide a clear and concise description of what the security issue is. -->
 
 ## Proof of Concept (PoC)
