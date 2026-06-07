@@ -2,18 +2,16 @@
 
 Issues are tracked at https://github.com/roberts1000/rspec_n/issues. Issues marked as **(Internal)** only affect development.
 
-## Next Release
-
-1. [#136](../../issues/136): Allow Bundler >= 2.0. **(Internal)**
-1. [#139](../../issues/139): Remove Ruby 3.2 support.
-1. [#141](../../issues/141): Add Ruby 4.0 support.
-
-## 2.1.0 (Jul 16, 2025)
+## 2.1.0 (Jun 06, 2026)
 
 1. [#124](../../issues/124): Remove Ruby 3.0 support.
 1. [#126](../../issues/126): Update development and test gems. **(Internal)**
 1. [#128](../../issues/128): Add Ruby 3.4 support.
 1. [#131](../../issues/131): Remove Ruby 3.1 support.
+1. [#134](../../issues/134): Move info to the wiki. **(Internal)**
+1. [#136](../../issues/136): Allow Bundler >= 2.0. **(Internal)**
+1. [#139](../../issues/139): Remove Ruby 3.2 support.
+1. [#141](../../issues/141): Add Ruby 4.0 support.
 
 ## 2.0.0 (Mar 08, 2024)
 
