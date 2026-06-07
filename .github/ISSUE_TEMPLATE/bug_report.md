@@ -9,7 +9,7 @@ assignees: ''
 
 ## Describe the bug
 
-<!-- Provide a clear and concise description of what the bug is. -->
+<!-- Describe the bug clearly and concisely. -->
 
 ## To Reproduce
 
@@ -17,12 +17,12 @@ assignees: ''
 
 ## Expected behavior
 
-<!-- Explain the behavior you expected -->
+<!-- Explain the behavior you expected. -->
 
 ## Screenshots
 
-<!-- If you have screenshots, place them here. -->
+<!-- Add screenshots if you have any. -->
 
-## Additional context
+## Additional Info
 
-<!-- Place any other context about the problem here. -->
+<!-- Provide other info that might help. -->

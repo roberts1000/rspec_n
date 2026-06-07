@@ -1,3 +1,11 @@
-<!-- Replace XYZ with the related GitHub issue number. -->
+## Supported Issue
+
+<!-- Replace `XY`Z with the single associated GitHub issue number. -->
 
 Closes #XYZ
+
+## Additional Info
+
+<!-- Provide details that will help the reviewers understand your work. -->
+
+None

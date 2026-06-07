@@ -14,5 +14,5 @@ currently being supported with security updates.
 
 To report a Security issue:
 
-- (**Preferred Method ⭐**) Submit a private GitHub Advisory using [this form](https://github.com/eclipse-leshan/leshan/security/advisories/new), to the maintainers. See [Github Security Advisories](https://docs.github.com/en/code-security/security-advisories/repository-security-advisories/about-repository-security-advisories) for more info.
+- (**Preferred Method ⭐**) Submit a private GitHub Advisory using [this form](https://github.com/rsmoly/rmsoly/security/advisories/new), to the maintainers. See [Github Security Advisories](https://docs.github.com/en/code-security/security-advisories/repository-security-advisories/about-repository-security-advisories) for more info.
 - Submit a [GitHub Issue](https://github.com/roberts1000/rspec_n/issues).
