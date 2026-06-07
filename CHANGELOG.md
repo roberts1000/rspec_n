@@ -5,6 +5,7 @@ Issues are tracked at https://github.com/roberts1000/rspec_n/issues. Issues mark
 ## Next Release
 
 1. [#136](../../issues/136): Allow Bundler >= 2.0. **(Internal)**
+1. [#139](../../issues/139): Remove Ruby 3.2 support.
 
 ## 2.1.0 (Jul 16, 2025)
 
