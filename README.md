@@ -21,7 +21,7 @@ Releases are versioned using [SemVer 2.0.0](https://semver.org/spec/v2.0.0.html)
 
 ## Supported Ruby Versions
 
-Ruby 3.2, 3.3 and 3.4 are supported.
+Ruby 3.3 and 3.4 are supported.
 
 ## Installation
 
@@ -54,7 +54,7 @@ gem 'rspec_n', require: false
     ```
     DISABLE_DATABASE_ENVIRONMENT_CHECK=1 RAILS_ENV=test bundle exec rake db:drop db:create db:schema:load rake db:drop db:create db:schema:load
     ```
-    
+
     1. `DISABLE_DATABASE_ENVIRONMENT_CHECK=1` disables a Rails check that can prevent the test database from being dropped.
     1. Since `db:schema:load` is used to prepare the test database, projects must have a correct `schema.rb` or `structure.sql`.
 1. By default, rspec_n tries to ensure an empty database **before each run** so it does not load seed files. If your test suite depends on seeded data, or other special setup, you will need to specify the exact command that rspec_n uses to invoke each run. See the [Use a Custom Command to Start RSpec](#Use-a-Custom-Command-to-Start-RSpec) section for more info.
@@ -97,7 +97,7 @@ There are a couple points to consider:
     ```
     $ rspec_n 5 -c 'rm -rf tmp && bundle exec rspec' --order defined
     ```
-   
+
 ### Control the File Output
 
 rspec_n writes output to the project's root folder, for each iteration, to files with the iteration number in the name (`rspec_n_iteration.1`, `rspec_n_iteration.2`, etc...). If you want to disable this, add the `--no-file` option to the command.
