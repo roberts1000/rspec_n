@@ -2,7 +2,7 @@
 
 Issues are tracked at https://github.com/roberts1000/rspec_n/issues. Issues marked as **(Internal)** only affect development.
 
-## 2.1.0 (Jun 06, 2026)
+## 2.1.0 (Jun 07, 2026)
 
 1. [#124](../../issues/124): Remove Ruby 3.0 support.
 1. [#126](../../issues/126): Update development and test gems. **(Internal)**

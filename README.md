@@ -4,15 +4,6 @@ rspec_n is a Ruby gem that makes it easy to run a project's RSpec test suite N t
 
 ![example](https://user-images.githubusercontent.com/2053901/53691471-c6956880-3d4c-11e9-8248-68bbb4c24786.png)
 
-#### Automatic Command Selection
-
-rspec_n inspects files in your project and determines the best way to start RSpec. If it can't make an educated guess, it will use `bundle exec rspec` as the base command and add any extra information you've entered on the command line (like the order or paths). The following is a list of project types that rspec_n can identify and the associated commands it will try to execute:
-
-1. Ruby on Rails Applications: `DISABLE_DATABASE_ENVIRONMENT_CHECK=1 RAILS_ENV=test bundle exec rake db:drop db:create db:schema:load && bundle exec rspec`.
-2. Everything else: `bundle exec rspec`.
-
-**Note:** You can override this behavior by using the `-c` option, which lets you specify your own command. See the [Use a Custom Command to Start RSpec](#Use-a-Custom-Command-to-Start-RSpec) section for more info.
-
 ## Versioning Strategy
 
 Releases are versioned using [SemVer 2.0.0](https://semver.org/spec/v2.0.0.html) with the following caveats:
@@ -27,7 +18,7 @@ Ruby 3.3, 3.4 and 4.0 are supported.
 
 Install by executing:
 
-    $ gem install rspec_n
+    gem install rspec_n
 
 The gem will install an executable called `rspec_n`.
 
@@ -53,4 +44,4 @@ See the [Development Guide](https://github.com/roberts1000/rspec_n/wiki/developm
 
 ## Contributing
 
-See [CONTRIBUTING](contributing.md).
+See [CONTRIBUTING](https://github.com/roberts1000/rspec_n/blob/master/CONTRIBUTING.md) or [SECURITY](https://github.com/roberts1000/rspec_n/blob/master/SECURITY.md).
