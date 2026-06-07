@@ -11,6 +11,7 @@ Issues are tracked at https://github.com/roberts1000/rspec_n/issues. Issues mark
 1. [#136](../../issues/136): Allow Bundler >= 2.0. **(Internal)**
 1. [#139](../../issues/139): Remove Ruby 3.2 support.
 1. [#141](../../issues/141): Add Ruby 4.0 support.
+1. [#151](../../issues/151): Add workflow permissions. **(Internal)**
 
 ## 2.0.0 (Mar 08, 2024)
 
